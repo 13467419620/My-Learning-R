@@ -1,2 +1,2 @@
 # My-Learning-R
-This repository is the place where I record my R learning path.
+:sparkles::sparkles::sparkles:This repository is the place where I record my R learning path.:sparkles::sparkles::sparkles:
