@@ -1,0 +1,15 @@
+---
+title: 多张图片组成的幻灯片
+author: XXX
+date: 2020-08-06
+---
+
+```{r, echo=FALSE}
+knitr::include_graphics("figures/fig001.png")
+```
+
+
+```{r, echo=FALSE}
+knitr::include_graphics("figures/fig002.png")
+```
+

@@ -1,0 +1,132 @@
+---
+title: "中文beamer演示稿模板"
+author: "李东风"
+date: "2022年1月5日"
+documentclass: beamer
+bibliography: [mybib.bib]
+biblio-style: apa
+link-citations: yes
+description: "这是用R的bookdown功能制作中文bearmer演示稿的模板，输出格式为beamer_presentation."
+output: 
+  beamer_presentation:
+    includes:
+      in_header: preamble.tex
+    latex_engine: xelatex
+    slide_level: 2
+    theme: CambridgeUS
+    colortheme: dolphin
+    citation_package: biblatex
+    keep_tex: yes
+language:
+  label:
+    thm: '定理'
+    def: '定义'
+    exm: '例'
+    proof: '证明: '
+    solution: '解: '
+    fig: '图'
+    tab: '表'
+  ui:
+    chapter_name: ''
+delete_merged_file: true
+---
+
+# 简介 {#intro}
+
+## 安装使用
+
+* 这个子目录是用R Markdown制作beamer格式的PDF演示稿的模板。
+* 只要将“Beamer”子目录复制到同级的一个子目录如“Books/MyBeamer”，
+  然后在这个目录中建立一个RStudio项目，
+  就可以修改为自己所需的演讲稿内容。
+
+## 设置
+
+* 这里的主要文件是“demo.Rmd”文件，
+  演讲稿内容写在这个文件中。
+* 一些设置写在“demo.Rmd”文件开头的的元数据中，
+  元数据就是开头用三个减号界定的部分。
+* 请谨慎修改元数据中的设置，
+  否则可能导致中文显示不出来。
+
+# 使用方法
+
+* 用两个井号开始一个新的页面，并在两个井号和空格之后输入页面标题。
+* 也可以用三个减号简单地换页，新页面没有标题。
+* 用如下命令编译为PDF：
+
+```{r, echo=TRUE, eval=FALSE}
+bookdown::render_book("demo.Rmd",  
+  output_format="beamer_presentation", encoding="UTF-8")
+```
+
+* 编译的PDF结果文件自动命名为“`demo.pdf`”。
+
+## 局限
+
+* 因为章节、图、表、公式的交叉引用需要bookdown包支持，
+  而bookdown还没有支持beamer格式，
+  所以这些功能暂缺。
+* 可以使用原始latex命令，
+  或者直接使用人为的编号和引用。
+
+# 内容范例
+
+## 数学公式
+
+* 行内公式如：$\Gamma(\alpha) = \int_0^\infty x^{\alpha-1} e^{-x} \,dx$.
+  注意行内公式的首尾不要有空格。
+* 无编号的独立公式：
+$$
+  e^x = \sum_{k=0}^\infty \frac{x^k}{k!} .
+$$
+* 无编号的多行公式：
+$$\begin{aligned}
+  y =& (a+b)^2 - (a-b)^2 \\
+  =& 4ab .
+\end{aligned}$$
+
+---
+
+* 单行的编号公式与引用，利用原始latex代码：
+\begin{equation}
+  y = (a+b)^2 - (a-b)^2 
+  \label{eq:myform01}
+\end{equation}
+* 见公式\eqref{eq:myform01}。
+* 多行的编号公式：
+\begin{align}
+  y =& (a+b)^2 - (a-b)^2 \nonumber \\
+  =& 4ab . \label{eq:myform02}
+\end{align}
+* 见公式\eqref{eq:myform02}。
+
+
+## 图形和图形引用
+
+```{r prg-testfig, fig.cap="测试图形", out.width="50%"}
+plot(1:10, (1:10)^2, type="l")
+```
+
+程序代码段中用`fig.cap`指定图形的标题，
+自动产生编号，但引用需要人为管理，如：见图1。
+
+## 表格和表格引用
+
+```{r prg-testtab}
+knitr::kable(mtcars[1:6, 1:4], caption="样例表格")
+```
+
+在`knitr::kable`函数中使用`caption`选项增加表格标题，
+自动产生编号，但引用需要人为管理，如：见表1。
+
+
+## 引用参考文献
+
+* 单篇文献如：[@MWP06-HighStat]
+* 多篇文献如：[@Wichmann1982:RNG; @Unwin-Visualize06]
+
+# 参考文献
+
+
+
